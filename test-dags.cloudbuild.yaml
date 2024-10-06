@@ -14,3 +14,4 @@ steps:
     args: ["-m", "pytest", "-s", "dags/"]
   options:
     logging: CLOUD_LOGGING_ONLY
+
