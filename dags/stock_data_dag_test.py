@@ -3,4 +3,4 @@ from stock_data_dag import stock_data_dag  # Import the specific DAG from stock_
 
 def test_dag_import():
     assert_has_valid_dag(stock_data_dag)   
-    
+
