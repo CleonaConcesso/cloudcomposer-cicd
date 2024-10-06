@@ -1,6 +1,5 @@
 from internal_unit_testing import assert_has_valid_dag
-from stock_data_dag import stock_data_dag  # Import the specific DAG from stock_data_dag.py
+from stock_data_dag import dag  # Import the DAG object directly
 
 def test_dag_import():
-    assert_has_valid_dag(stock_data_dag.stock_data_dag)   
-
+    assert_has_valid_dag(dag)  # Pass the DAG object to the testing function
