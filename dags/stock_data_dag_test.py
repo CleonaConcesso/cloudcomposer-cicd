@@ -1,5 +1,8 @@
 import internal_unit_testing
-from . import stock_data_dag as module  # Import the DAG object directly
 
+print("start")
 def test_dag_import():
+    print("hello")
+    from . import stock_data_dag as module
+    print("bye")
     internal_unit_testing.assert_has_valid_dag(module)  # Pass the DAG object to the testing function
