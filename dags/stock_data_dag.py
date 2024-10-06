@@ -11,12 +11,12 @@ import fnmatch
 import yfinance as yf
 from google.cloud import storage
 
-PROJECT_ID="amara-sandbox-1"
+PROJECT_ID="maximal-chemist-355505"
 STAGING_DATASET = "stock_dataset"
 LOCATION = "us-central1"
 
 default_args = {
-    'owner': 'Amara',
+    'owner': 'Cleona',
     'depends_on_past': False,
     'email_on_failure': False,
     'email_on_retry': False,
@@ -31,7 +31,7 @@ def get_data():
 
     # Set start and end dates
     today = dt.datetime.now()
-    start = dt.datetime(2023, 2, 1,)
+    start = dt.datetime(2023, 1, 1,)
     end = dt.date(today.year, today.month, today.day)
 
     # API call to download data from yahoo finance
@@ -57,7 +57,6 @@ def get_data():
     blob.upload_from_string(data)
     print(f"data sucessfully uploadesd to {bucket}")
 
-
 with DAG('Stock_data',
          start_date=days_ago(1), 
          schedule_interval="@once",
@@ -69,20 +68,17 @@ with DAG('Stock_data',
     generate_uuid = PythonOperator(
             task_id="generate_uuid", 
             python_callable=lambda: "the_demo_" + str(uuid.uuid4()),
-            
         )
 
     create_bucket = GCSCreateBucketOperator(
             task_id="create_bucket",
             bucket_name="{{ task_instance.xcom_pull('generate_uuid') }}",
             project_id=PROJECT_ID,
-            
         )
 
     pull_stock_data_to_gcs = PythonOperator(
         task_id = 'pull_stock_data_to_gcs',
         python_callable = get_data,
-
         )
 
     load_to_bq = GCSToBigQueryOperator(
@@ -95,7 +91,7 @@ with DAG('Stock_data',
         allow_quoted_newlines = 'true',
         skip_leading_rows = 1,
         schema_fields=[
-        {'name': 'Date', 'type': 'DATE', 'mode': 'NULLABLE'},
+        {'name': 'Date', 'type': 'TIMESTAMP', 'mode': 'NULLABLE'},
         {'name': 'AMZN', 'type': 'FLOAT64', 'mode': 'NULLABLE'},
         {'name': 'GOOGL', 'type': 'FLOAT64', 'mode': 'NULLABLE'},
         {'name': 'MSFT', 'type': 'FLOAT64', 'mode': 'NULLABLE'},
