@@ -2,7 +2,7 @@ steps:
   # Step 1: Install dependencies from requirements.txt
   - name: 'python'
     entrypoint: 'pip'
-    args: ['install', '-r', 'utils/requirements.txt']  # Removed '--user' for a more standard installation
+    args: ['install', '-r', 'utils/requirements.txt']  # This installs required packages.
 
   # Step 2: Update the Composer environment with new dependencies
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -20,8 +20,13 @@ steps:
 
   # Step 3: Run the Python script to add DAGs to the Composer environment
   - name: 'python'
-    entrypoint: 'python'
-    args: ['utils/add_dags_to_composer.py', '--dags_directory=${_DAGS_DIRECTORY}', '--dags_bucket=${_DAGS_BUCKET}']
+    entrypoint: 'bash'
+    args: 
+      - '-c'
+      - |
+        # Optionally install dependencies again for the script execution
+        pip install -r utils/requirements.txt
+        python utils/add_dags_to_composer.py --dags_directory=${_DAGS_DIRECTORY} --dags_bucket=${_DAGS_BUCKET}
 
 options:
   logging: CLOUD_LOGGING_ONLY  # Log only to Cloud Logging
