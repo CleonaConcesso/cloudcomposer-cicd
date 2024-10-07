@@ -1,5 +1,6 @@
-import pytest
+import internal_unit_testing
 
-def test_hello_world():   
-    print("Hello, World!")  # This will print only if the module is found
-    assert True  # Th
+def test_dag_import():
+    from . import stock_data_dag
+
+    internal_unit_testing.assert_has_valid_dag(stock_data_dag)
