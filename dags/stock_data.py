@@ -57,7 +57,7 @@ def get_data():
     blob.upload_from_string(data)
     print(f"data sucessfully uploadesd to {bucket}")
 
-with DAG('Stock_data',
+with DAG('Stock_data_dag',
          start_date=days_ago(1), 
          schedule_interval="@once",
          catchup=False, 
