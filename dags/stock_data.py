@@ -24,7 +24,7 @@ default_args = {
     'start_date':  days_ago(1),
     'retry_delay': timedelta(minutes=5),
 }
-
+#small change
 def get_data():
     # Tickers list for data extraction from yahoo finance
     tickers = ['MSFT','AMZN','GOOGL']
