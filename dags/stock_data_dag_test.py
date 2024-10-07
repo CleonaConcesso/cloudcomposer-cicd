@@ -1,5 +1,5 @@
 import pytest
-from . import internal_unit_testing
+import internal_unit_testing
 
 
 def test_dag_import():
