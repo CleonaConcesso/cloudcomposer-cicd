@@ -16,7 +16,7 @@ STAGING_DATASET = "stock_dataset"
 LOCATION = "us-central1"
 
 default_args = {
-    'owner': 'Cleona',
+    'owner': 'xoxo',
     'depends_on_past': False,
     'email_on_failure': False,
     'email_on_retry': False,
@@ -57,7 +57,7 @@ def get_data():
     blob.upload_from_string(data)
     print(f"data sucessfully uploadesd to {bucket}")
 
-with DAG('Stock_data_dag',
+with DAG('Stock_data_dag_demo',
          start_date=days_ago(1), 
          schedule_interval="@once",
          catchup=False, 
