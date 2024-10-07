@@ -2,11 +2,11 @@ steps:
   # Install dependencies
   - name: python:3.8-slim
     entrypoint: pip
-    args: ["install", "-r", "requirements.txt", "--user"]
+    args: ["install", "-r", "requirements.txt"]
 
   - name: python:3.8-slim
     entrypoint: pip
-    args: ["install", "-r", "requirements-test.txt", "--user"]
+    args: ["install", "-r", "requirements-test.txt"]
 
   # Run tests using Python 3.8
   - name: python:3.8-slim
