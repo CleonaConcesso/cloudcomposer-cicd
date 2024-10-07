@@ -1,17 +1,14 @@
 steps:
-  # Install dependencies
+  # Install dependencies and run tests in one step
   - name: python:3.8-slim
-    entrypoint: pip
-    args: ["install", "-r", "requirements.txt", "--user"]
-
-  - name: python:3.8-slim
-    entrypoint: pip
-    args: ["install", "-r", "requirements-test.txt", "--user"]
-
-  # Run tests using Python 3.8
-  - name: python:3.8-slim
-    entrypoint: python3.8
-    args: ["-m", "pytest", "-s", "dags/"]
-
+    entrypoint: /bin/bash
+    args:
+      - -c
+      - |
+        pip install -r requirements.txt
+        pip install -r requirements-test.txt
+        pip install pytest
+        python3.8 -m pytest -s dags/
 options:
   logging: CLOUD_LOGGING_ONLY
+
