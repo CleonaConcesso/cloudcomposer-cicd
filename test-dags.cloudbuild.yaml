@@ -1,17 +1,13 @@
 steps:
-  # Install dependencies
-  - name: python:3.8-slim
-    entrypoint: pip
-    args: ["install", "-r", "requirements.txt"]
-
-  - name: python:3.8-slim
-    entrypoint: pip
-    args: ["install", "-r", "requirements-test.txt"]
-
-  # Run tests using Python 3.8
-  - name: python:3.8-slim
-    entrypoint: python3.8
-    args: ["-m", "pytest", "-s", "dags/"]
+  - name: 'python:3.8-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install -r requirements.txt
+        pip install -r requirements-test.txt
+        pip list  # List installed packages for debugging
+        python -m pytest -s dags/
 
 options:
   logging: CLOUD_LOGGING_ONLY
