@@ -16,7 +16,7 @@ STAGING_DATASET = "stock_dataset"
 LOCATION = "us-central1"
 
 default_args = {
-    'owner': 'xoxo',
+    'owner': 'Cleona',
     'depends_on_past': False,
     'email_on_failure': False,
     'email_on_retry': False,
@@ -24,7 +24,7 @@ default_args = {
     'start_date':  days_ago(1),
     'retry_delay': timedelta(minutes=5),
 }
-#small change
+
 def get_data():
     # Tickers list for data extraction from yahoo finance
     tickers = ['MSFT','AMZN','GOOGL']
@@ -57,7 +57,7 @@ def get_data():
     blob.upload_from_string(data)
     print(f"data sucessfully uploadesd to {bucket}")
 
-with DAG('test_dag',
+with DAG('stock_finance_dag',
          start_date=days_ago(1), 
          schedule_interval="@once",
          catchup=False, 
@@ -108,5 +108,5 @@ with DAG('test_dag',
         >> create_bucket
         >> pull_stock_data_to_gcs
         >> load_to_bq
-#        >> delete_bucket
+       # >> delete_bucket
     )
