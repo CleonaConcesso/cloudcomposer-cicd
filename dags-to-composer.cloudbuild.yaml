@@ -1,6 +1,6 @@
 steps:
   # Step 1: Install dependencies from requirements.txt
-  - name: 'python'
+  - name: 'python:3.10-slim'
     entrypoint: 'pip'
     args: ['install', '-r', 'utils/requirements.txt']  # This installs required packages.
 
@@ -19,7 +19,7 @@ steps:
     timeout: 3600s  # Set timeout for the update step
 
   # Step 3: Run the Python script to add DAGs to the Composer environment
-  - name: 'python'
+  - name: 'python:3.10-slim'
     entrypoint: 'bash'
     args: 
       - '-c'
