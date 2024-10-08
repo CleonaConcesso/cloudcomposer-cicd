@@ -1,6 +1,7 @@
 import argparse
 import glob
 import os
+import cgi
 from shutil import copytree, ignore_patterns
 import tempfile
 from typing import List, Tuple
