@@ -57,7 +57,7 @@ def get_data():
     blob.upload_from_string(data)
     print(f"data sucessfully uploadesd to {bucket}")
 
-with DAG('training_dag',
+with DAG('simple_dag',
          start_date=days_ago(1), 
          schedule_interval="@once",
          catchup=False, 
@@ -111,3 +111,4 @@ with DAG('training_dag',
        # >> delete_bucket
     )
 #another change
+#small change
