@@ -98,17 +98,17 @@ with DAG('simple_dag',
             ],
         )
     
-    # delete_bucket = GCSDeleteBucketOperator(
-    #         task_id="delete_bucket",
-    #         bucket_name="{{ task_instance.xcom_pull('generate_uuid') }}",
-    #     )
+    delete_bucket = GCSDeleteBucketOperator(
+            task_id="delete_bucket",
+            bucket_name="{{ task_instance.xcom_pull('generate_uuid') }}",
+        )
 
     (
         generate_uuid
         >> create_bucket
         >> pull_stock_data_to_gcs
         >> load_to_bq
-       # >> delete_bucket
+        >> delete_bucket
     )
 #another change
 #small change
