@@ -110,5 +110,4 @@ with DAG('simple_dag',
         >> load_to_bq
         >> delete_bucket
     )
-#another change
-#small change
+
